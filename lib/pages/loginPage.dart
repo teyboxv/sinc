@@ -111,23 +111,53 @@ class _LoginPageState extends State<LoginPage> {
               
               
               //facebook+google+apple buttons
-              Row(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                 //facebook
                 SquareTile(imagePath: "lib/assets/images/facebook.png"),
+                SizedBox(width: 8,),
 
                 //gooogle
                 SquareTile(imagePath: "lib/assets/images/google.png"),
+                SizedBox(width: 8,),
 
                 //apple
                 SquareTile(imagePath: "lib/assets/images/apple.png"),
 
               ],
                 
-              )
+              ),
+              SizedBox(height: 66),
 
 
 
               //don't have an account? sign up
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Dont have an account?",
+                    style: TextStyle(
+                      color: Color(0xFF0C2027),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Urbanist",
+                    ),
+                    
+                  
+                  ),
+                  SizedBox(width: 4,),
+                  Text(
+                      "Register Now",
+                      style: TextStyle(
+                        color: Color(0xFF40798C),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Urbanist",
+                      ),
+                    ),
+                ],
+              )
           
           ],),
         ),
