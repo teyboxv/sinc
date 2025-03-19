@@ -3,19 +3,21 @@ import 'package:sincapp/components/myButton.dart';
 import 'package:sincapp/components/square_tile.dart';
 import 'package:sincapp/components/textfield.dart';
 
-class LoginPage extends StatefulWidget {
-   LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 // text editing controller
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,46 +35,40 @@ class _LoginPageState extends State<LoginPage> {
                   fontFamily: "Iceberg",
                 ),
               ),
-
+      
               SizedBox(height: 30),
               
               // email username field
               MyTextField(
-                hintText: "Enter your email or username",
+                hintText: "Username",
                 obscureText: false,
                 controller: usernameController,
               ),
               SizedBox(height: 5),
               // password field
               MyTextField(
-                hintText: "Enter your password",
+                hintText: "Email",
+                obscureText: false,
+                controller: emailController,
+              ),
+              MyTextField(
+                hintText: "Password",
                 obscureText: true,
                 controller: passwordController,
               ),
-              //forgot password field
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Forgot Password?",
-                      style: TextStyle(
-                        color: Color(0xFF6A707C),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Urbanist",
-                      ),
-                    ),
-                  ],
-                ),
+              MyTextField(
+                hintText: "Confirm Password",
+                obscureText: true,
+                controller: confirmPasswordController,
               ),
-
+              //forgot password field
+              
+      
               SizedBox(height: 32),
               //Login button
-              MyButton(title:"Login"),
+              MyButton(title:"Agree and Register"),
               SizedBox(height: 30),
-
+      
               //or login with
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -117,21 +113,21 @@ class _LoginPageState extends State<LoginPage> {
                 //facebook
                 SquareTile(imagePath: "lib/assets/images/facebook.png"),
                 SizedBox(width: 8,),
-
+      
                 //gooogle
                 SquareTile(imagePath: "lib/assets/images/google.png"),
                 SizedBox(width: 8,),
-
+      
                 //apple
                 SquareTile(imagePath: "lib/assets/images/apple.png"),
-
+      
               ],
                 
               ),
-              SizedBox(height: 66),
-
-
-
+              SizedBox(height: 40),
+      
+      
+      
               //don't have an account? sign up
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
