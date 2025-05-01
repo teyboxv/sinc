@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         splashFactory: NoSplash.splashFactory,
         ),
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: MainPage(),
     );
   }
 }

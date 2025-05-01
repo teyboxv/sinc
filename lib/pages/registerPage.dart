@@ -66,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
       
               SizedBox(height: 32),
               //Login button
-              MyButton(title:"Agree and Register"),
+              MyButton(title:"Agree and Register", passedFunc: (){},),
               SizedBox(height: 30),
       
               //or login with

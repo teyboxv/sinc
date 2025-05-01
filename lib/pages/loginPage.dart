@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
 
               SizedBox(height: 32),
               //Login button
-              MyButton(title:"Login"),
+              MyButton(title:"Login", passedFunc: (){},),
               SizedBox(height: 30),
 
               //or login with

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyButton extends StatefulWidget {
-  const MyButton({super.key, required this.title});
+  const MyButton({super.key, required this.title , required this.passedFunc});
   final String title;
-
+final VoidCallback passedFunc; 
   @override
   State<MyButton> createState() => _MyButtonState();
 }
@@ -14,18 +14,23 @@ class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTapUp: (_) {
         setState(() {
-          isPressed = !isPressed;
-          isPressed = !isPressed;
+          isPressed = false;
         });
-      },
+      }, 
+      
+      onTapDown: (_) {
+        setState(() {
+          isPressed = true;
+        });
+      } ,
       
       
       child: Container(
         padding: EdgeInsets.all(22),
         margin: EdgeInsets.symmetric(horizontal: 22),
-        decoration: BoxDecoration(color: Color(isPressed ? 0xFFA3D5E7 : 0xFF0C2027), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: (isPressed ?Color.fromRGBO(12, 32, 39, 0.4) : Color.fromRGBO(12, 32, 39, 1) ), borderRadius: BorderRadius.circular(8)),
         child: Center(
            child: Text(
             widget.title,
