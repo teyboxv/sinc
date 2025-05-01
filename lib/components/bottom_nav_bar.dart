@@ -12,7 +12,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(items: [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Add"),
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: "Add"),
+      BottomNavigationBarItem(icon: Icon(Icons.facebook), label: "Profile"),
+      BottomNavigationBarItem(icon: Icon(Icons.home), label: "Add")
     ],
     backgroundColor: Color(0xFFCFD8C7),
     
