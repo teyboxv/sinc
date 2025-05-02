@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sincapp/components/bottom_nav_bar.dart';
+import 'package:sincapp/components/BottomNavBar/customNavBar.dart';
 import 'package:sincapp/components/backButton.dart';
 import 'package:sincapp/components/myButton.dart';
 
@@ -98,7 +98,12 @@ class _PostPageState extends State<Postpage> {
                     Spacer(),
 
                     // button
-                    MyButton(title: "Share")
+                MyButton(
+                  title: "Share",
+                  passedFunc: () {
+                    // Handle share button tap
+                  },
+                )
                   ],
                 ),
               ),
@@ -113,7 +118,7 @@ class _PostPageState extends State<Postpage> {
           //button
         ],
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 }

@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -31,6 +18,29 @@
 
   <title>sincapp</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- JS Interop -->
+  <!-- JS Interop -->
+  <script src="https://unpkg.com/@js-interop/js@latest/dist/bundle.js"></script>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCtGN0WUHMTFcxh7H2yQJKyBmWXOSMj0AQ",
+      projectId: "sinc2-12522",
+      authDomain: "sinc2-12522.firebaseapp.com",
+      storageBucket: "sinc2-12522.appspot.com",
+      messagingSenderId: "556742296297",
+      appId: "1:556742296297:ios:7d88c5dd611f21d88b6678"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
