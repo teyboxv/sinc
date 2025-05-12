@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:sincapp/pages/login/loginPage.dart';
 class appBar extends StatelessWidget {
-  const appBar({super.key});
+  VoidCallback signOutTapped;
+
+  appBar({super.key, required this.signOutTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,22 @@ class appBar extends StatelessWidget {
                     padding: const EdgeInsets.only(right:10.0 , top:15),
                     child: Icon(Icons.message),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right:10.0 , top:15),
-                    child: Icon(Icons.settings),
+                  GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right:10.0 , top:15),
+                      child: Icon(Icons.settings),
+                      
+                    ),
+                    onTap:(){
+                      signOutTapped();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        );
+                      print("signOutTapped();");
+                    },
                   ),
 
                 

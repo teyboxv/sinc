@@ -118,7 +118,7 @@ class _PostPageState extends State<Postpage> {
           //button
         ],
       ),
-      bottomNavigationBar: CustomNavBar(),
+      
     );
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:sincapp/pages/loginPage.dart';
+import 'package:sincapp/pages/login/loginPage.dart';
 import 'package:sincapp/pages/mainPage.dart';
 import 'package:sincapp/pages/registerPage.dart';
 import 'package:sincapp/pages/postPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sincapp/services/Auth/auth_providers.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
@@ -35,18 +36,24 @@ void main() async {
   }
   
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,  // Enable in debug mode only
-      builder: (context) => const MyApp(),
-    ),
+    
+    ProviderScope(child: 
+      const MyApp()
+    )
+    
+    
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
   
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authStateChangesProvider);
+    
+    
+    
     return MaterialApp(
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
@@ -58,7 +65,18 @@ class MyApp extends StatelessWidget {
         splashFactory: NoSplash.splashFactory,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: authState.when(
+        data: (user){ 
+        if (user != null) {
+          return  MainPage();
+        } else {
+          return  LoginPage();
+        }
+      },
+      loading: () => const CircularProgressIndicator(),
+      error: (error, stackTrace) => Text('Error: $error'),
+      
+      ),
     );
   }
 }

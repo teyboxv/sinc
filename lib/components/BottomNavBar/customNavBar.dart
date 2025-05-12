@@ -6,17 +6,18 @@ import 'bottomAddButton.dart';
 class CustomNavBar extends StatefulWidget {
   // Callback function to notify the parent widget when a tab is selected.
   // We'll uncomment and use this later for page navigation.
-  // final Function(int) onTapSelected;
+  final Function(int) onTapSelected;
 
   // Allows the parent widget to specify which tab should be selected initially.
   final int initialIndex;
-
+  
   // Constructor for the CustomNavBar widget.
   // It requires the onTapSelected callback and optionally takes an initialIndex.
   const CustomNavBar({
     super.key, // Standard key parameter for widgets
-    // required this.onTapSelected, // Uncomment later
+    required this.onTapSelected, // Uncomment later
     this.initialIndex = 0, // Default to the first tab (index 0) if not provided
+
   });
 
   // Creates the mutable state for this widget.
@@ -47,8 +48,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
       _selectedIndex = index;
     });
     // Notify the parent widget about the tap (uncomment later).
-    // widget.onTapSelected(index);
-    print("Tapped index: $index"); // Useful for debugging during development.
+    widget.onTapSelected(index);
+    // print("Tapped index: $index"); // Useful for debugging during development.
   }
 
   // Helper function to build the UI for a single navigation item.

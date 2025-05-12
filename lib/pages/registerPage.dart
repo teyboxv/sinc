@@ -3,24 +3,27 @@ import 'package:sincapp/components/myButton.dart';
 import 'package:sincapp/components/square_tile.dart';
 import 'package:sincapp/components/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sincapp/pages/loginPage.dart';
-
-class RegisterPage extends StatefulWidget {
+import 'package:sincapp/pages/login/loginPage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sincapp/services/Auth/firebaseauth.dart';
+import 'package:sincapp/services/Auth/auth_providers.dart';
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
 }
 
 // text editing controller
-final usernameController = TextEditingController();
-final passwordController = TextEditingController();
-final emailController = TextEditingController();
-final confirmPasswordController = TextEditingController();
 
-class _RegisterPageState extends State<RegisterPage> {
+
+class _RegisterPageState extends ConsumerState<RegisterPage> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   // Firebase Auth instance
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  
   bool isLoading = false;
   String errorMessage = '';
 
@@ -49,19 +52,20 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     try {
-      await _auth.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+      final authService = ref.read(authServiceProvider);
+      await authService.signUp(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+        usernameController.text.trim(),
       );
+      
+          
 
       // Add username to user profile
-      if (_auth.currentUser != null) {
-        await _auth.currentUser!
-            .updateDisplayName(usernameController.text.trim());
-      }
+      
 
       // Sign out the user after registration
-      await _auth.signOut();
+      
 
       // Navigate to login page and show success message
       if (mounted) {
@@ -80,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
       });
     } catch (e) {
       setState(() {
-        errorMessage = 'An unexpected error occurred';
+        errorMessage = e.toString();
       });
     } finally {
       if (mounted) {

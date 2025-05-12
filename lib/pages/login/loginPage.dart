@@ -5,8 +5,11 @@ import 'package:sincapp/components/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sincapp/pages/mainPage.dart';
 import 'package:sincapp/pages/registerPage.dart';
+import 'package:sincapp/services/Auth/auth_providers.dart';
+import 'package:sincapp/services/Auth/firebaseauth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   final bool showSuccessMessage;
   
   const LoginPage({
@@ -15,16 +18,15 @@ class LoginPage extends StatefulWidget {
   });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   // Text controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   
-  // Firebase Auth instance
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  
   
   // State variables
   bool isLoading = false;
@@ -45,10 +47,9 @@ class _LoginPageState extends State<LoginPage> {
     });
     
     try {
-      await _auth.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
+      final authService = ref.read(authServiceProvider);
+      await authService.signIn(emailController.text.trim(),
+                                passwordController.text.trim());
       
       // Navigate to main page on successful login
       if (mounted) {
@@ -63,7 +64,8 @@ class _LoginPageState extends State<LoginPage> {
       });
     } catch (e) {
       setState(() {
-        errorMessage = 'An unexpected error occurred';
+        errorMessage = e.toString();
+        print(e.toString());
       });
     } finally {
       if (mounted) {
@@ -142,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           // Handle forgot password
                           if (emailController.text.isNotEmpty) {
-                            _auth.sendPasswordResetEmail(email: emailController.text.trim());
+                            // _auth.sendPasswordResetEmail(email: emailController.text.trim());
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text('Password reset email sent!'),
